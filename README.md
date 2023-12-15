@@ -7,6 +7,7 @@ Technologies used:
 * Reactjs
 * Nodejs
 * Typescript
+* Vite
 * Tailwindcss
 * React-dropzone
 * Formik
