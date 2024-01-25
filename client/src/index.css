@@ -158,11 +158,6 @@ html {
 
 .AppsHeader {
   background-image: url(https://images.pexels.com/photos/11361902/pexels-photo-11361902.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
-  background-repeat: no-repeat;
-  width: 1000px;
-  height: 500px;
-  background-size: cover;
-  background-position: left 10% bottom 90%;
 }
 
 .headCard-filter {
@@ -261,7 +256,9 @@ html {
       rgb(0, 255, 0)
     )
     border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
   border-bottom: transparent;
@@ -279,7 +276,9 @@ html {
       rgb(0, 255, 0)
     )
     border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
   border-bottom: transparent;
@@ -546,15 +545,15 @@ html {
 
 /* box shadow */
 .box-shadow-inner-light {
-  box-shadow: 1px 1px 5px 5px rgba(124,208,255,0.5) inset;
-  -webkit-box-shadow: 1px 1px 5px 5px rgba(124,208,255,0.5) inset;
-  -moz-box-shadow: 1px 1px 5px 5px rgba(124,208,255,0.5) inset;
+  box-shadow: 1px 1px 5px 5px rgba(124, 208, 255, 0.5) inset;
+  -webkit-box-shadow: 1px 1px 5px 5px rgba(124, 208, 255, 0.5) inset;
+  -moz-box-shadow: 1px 1px 5px 5px rgba(124, 208, 255, 0.5) inset;
 }
 
 .box-shadow-inner {
-  box-shadow: 1px 1px 12px -8px rgba(0,0,0,1) inset;
--webkit-box-shadow: 1px 1px 12px -8px rgba(0,0,0,1) inset;
--moz-box-shadow: 1px 1px 12px -8px rgba(0,0,0,1) inset;
+  box-shadow: 1px 1px 12px -8px rgba(0, 0, 0, 1) inset;
+  -webkit-box-shadow: 1px 1px 12px -8px rgba(0, 0, 0, 1) inset;
+  -moz-box-shadow: 1px 1px 12px -8px rgba(0, 0, 0, 1) inset;
 }
 
 /* scroll bar */
@@ -569,7 +568,12 @@ html {
 }
 
 .search-results::-webkit-scrollbar-thumb {
-  background-color: rgba(10, 47, 88, 0.5); /* Adjust the scrollbar color as needed */
+  background-color: rgba(
+    10,
+    47,
+    88,
+    0.5
+  ); /* Adjust the scrollbar color as needed */
   border-radius: 1px; /* Adjust the border radius as needed */
 }
 
@@ -592,16 +596,31 @@ html {
 }
 
 .search-results-light::-webkit-scrollbar-thumb {
-  background-color: rgba(62, 137, 187, 0.5); /* Adjust the scrollbar color as needed */
+  background-color: rgba(
+    62,
+    137,
+    187,
+    0.5
+  ); /* Adjust the scrollbar color as needed */
   border-radius: 1px; /* Adjust the border radius as needed */
 }
 
 .search-results-light::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(62, 137, 187, 0.5); /* Adjust the hover color as needed */
+  background-color: rgba(
+    62,
+    137,
+    187,
+    0.5
+  ); /* Adjust the hover color as needed */
 }
 
 .search-results-light::-webkit-scrollbar-track {
-  background-color: rgba(31, 67, 92, 0.5); /* Adjust the track color as needed */
+  background-color: rgba(
+    31,
+    67,
+    92,
+    0.5
+  ); /* Adjust the track color as needed */
 }
 
 @tailwind base;

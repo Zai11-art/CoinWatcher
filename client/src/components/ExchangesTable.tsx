@@ -7,14 +7,14 @@ import { useId } from "react";
 import { RootState } from "../state";
 
 interface DataType {
-  trust_score_rank : number;
+  trust_score_rank: number;
   image: string;
   id: string;
   name: string;
   country: string;
-  trade_volume_24h_btc_normalized : number;
-  trade_volume_24h_btc : number;
-  trust_score : number;
+  trade_volume_24h_btc_normalized: number;
+  trade_volume_24h_btc: number;
+  trust_score: number;
 }
 
 interface ExchangesTableType {
@@ -23,9 +23,15 @@ interface ExchangesTableType {
   lastPostIndex: number;
 }
 
-const ExchangesTable: React.FC<ExchangesTableType> = ({ data, firstPostIndex, lastPostIndex }) => {
-  const mode = useSelector((state : RootState) => state.mode);
+const ExchangesTable: React.FC<ExchangesTableType> = ({
+  data,
+  firstPostIndex,
+  lastPostIndex,
+}) => {
+  const mode = useSelector((state: RootState) => state.mode);
   const keyId = useId();
+
+  console.log(data?.length);
 
   return (
     <>
@@ -122,20 +128,17 @@ const ExchangesTable: React.FC<ExchangesTableType> = ({ data, firstPostIndex, la
                     } `}
                   >
                     <tr className="">
-                      {[
-                        "Country",
-                        " Nominal",
-                        "24h vol",
-                        "trust score",
-                      ].map((label, index) => (
-                        <th
-                          key={`${keyId}-${index}`}
-                          scope="col"
-                          className="w-64 px-4 py-3 text-left text-xs font-medium  uppercase tracking-wider"
-                        >
-                          {label}
-                        </th>
-                      ))}
+                      {["Country", " Nominal", "24h vol", "trust score"].map(
+                        (label, index) => (
+                          <th
+                            key={`${keyId}-${index}`}
+                            scope="col"
+                            className="w-64 px-4 py-3 text-left text-xs font-medium  uppercase tracking-wider"
+                          >
+                            {label}
+                          </th>
+                        )
+                      )}
                     </tr>
                   </thead>
                   <tbody

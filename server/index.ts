@@ -87,8 +87,10 @@ const upload = (path: string) =>
     }),
   });
 
-const register = async ({ req, res }: ControllerProps) => {
+const register = async (req: any, res: any) => {
   try {
+    const harow = req.body;
+    console.log(harow);
     const { userName, email, bio, password, picturePath, friends } = req.body;
     const awsPicturePath = req.file.location;
     const salt = await bcrypt.genSalt();
@@ -122,6 +124,8 @@ app.post(
   createPost
 );
 
+console.log("debug here");
+console.log(userRoutes);
 /* ROUTES */
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);

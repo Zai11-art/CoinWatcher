@@ -1,4 +1,3 @@
-
 import { useSelector } from "react-redux";
 import { RootState } from "../state";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
@@ -15,8 +14,8 @@ const Pagination = ({
   postsPerPage,
   setCurrentPage,
   currentPage,
-} : Pagination) => {
-  const mode = useSelector((state : RootState) => state.mode);
+}: Pagination) => {
+  const mode = useSelector((state: RootState) => state.mode);
 
   let pages = [];
   const totalPages = Math.ceil(totalPosts / postsPerPage);
@@ -60,7 +59,7 @@ const Pagination = ({
             mode === "light"
               ? "newscard-filter-light text-[#080e11]"
               : "bg-[#054569] text-[#ced7e0]"
-          } mx-[2px] my-[2px] rounded-md px-2 text-[15px] duration-200  hover:scale-[1.1] md:mx-[5px] md:text-[12px] lg:mx-[5px] lg:text-[15px]`}
+          } mx-[2px] my-[2px] rounded-md px-2  duration-200  hover:scale-[1.1] md:mx-[5px] text-sm `}
           onClick={() => setCurrentPage(1)}
         >
           First
@@ -72,7 +71,7 @@ const Pagination = ({
             mode === "light"
               ? "newscard-filter-light text-[#054569]"
               : "bg-[#054569] text-[#ced7e0]"
-          } mx-[2px] my-[2px] rounded-md px-2 text-[15px] duration-200  hover:scale-[1.1] md:mx-[5px] md:text-[12px] lg:mx-[5px] lg:text-[15px] ${
+          } mx-[2px] my-[2px] rounded-md px-2 duration-200  hover:scale-[1.1] md:mx-[5px] text-xs lg:mx-[5px] ${
             page === currentPage ? "active" : ""
           }`}
           key={index}

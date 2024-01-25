@@ -1,4 +1,3 @@
-
 //(decalration above used for sparklines as no alternatives are available at the moment)
 import { useEffect, useState } from "react";
 import { useId } from "react";
@@ -7,7 +6,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../state";
 import { Sparklines, SparklinesLine } from "react-sparklines";
 import { toast } from "react-toastify";
-import { IoStar, IoStarOutline, IoCheckmarkOutline, IoCloseOutline } from "react-icons/io5";
+import {
+  IoStar,
+  IoStarOutline,
+  IoCheckmarkOutline,
+  IoCloseOutline,
+} from "react-icons/io5";
 import Loader from "./Loader";
 
 interface CoinData {
@@ -123,20 +127,21 @@ const CoinTable = ({
 
   return (
     <div
-      className={`flex w-[100%] flex-row ${
+      className={`flex w-full flex-row ${
         mode === "light" ? "shadow-slate-900/30" : "shadow-blue-200/20"
       } shadow-2xl `}
     >
-      <div
-        className="flex h-full w-[40%] flex-col
-        sm:w-[200px] md:w-[200px] lg:w-[220px] xl:w-[220px]"
-      >
+      <div className="flex h-full flex-col lg:w-[30%] w-[45%]">
         <div>
           <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden border-b border-gray-200 shadow ">
               <table className="min-w-full divide-y divide-blue-400 shadow-xl">
                 <thead
-                  className={`text-glow  ${mode === "light"? "bg-slate-200/70 text-slate-900": " bg-[#082030] text-gray-300"}`}
+                  className={`text-glow  ${
+                    mode === "light"
+                      ? "bg-slate-200/70 text-slate-900"
+                      : " bg-[#082030] text-gray-300"
+                  }`}
                 >
                   <tr>
                     <th
@@ -182,9 +187,17 @@ const CoinTable = ({
                                 aria-label="remove to watchlist"
                                 onClick={() => {
                                   removetoWatchList(data);
-                                  toast.success(`${data.name} Removed From Watchlist`,{theme: `${mode === "light" ? "light" : "colored"}`});
+                                  toast.success(
+                                    `${data.name} Removed From Watchlist`,
+                                    {
+                                      theme: `${
+                                        mode === "light" ? "light" : "colored"
+                                      }`,
+                                    }
+                                  );
                                 }}
-                                className="mr-3 border-r-[1px] pr-1 text-[1.1rem] text-yellow-200 hover:text-blue-400">
+                                className="mr-3 border-r-[1px] pr-1 text-[1.1rem] text-yellow-200 hover:text-blue-400"
+                              >
                                 <IoStar />
                               </button>
                             ) : (
@@ -196,10 +209,20 @@ const CoinTable = ({
                                     addToWatchList(data);
                                     setredirectLogin(!redirectLogin);
                                     isAuth &&
-                                      toast.success(`${data.name} Added To Watchlist.`, {theme: `${mode === "light" ? "light": "colored"}`});
+                                      toast.success(
+                                        `${data.name} Added To Watchlist.`,
+                                        {
+                                          theme: `${
+                                            mode === "light"
+                                              ? "light"
+                                              : "colored"
+                                          }`,
+                                        }
+                                      );
                                   }}
-                                  className="mr-3 border-r-[1px] border-r-slate-500 pr-1 text-[1.1rem] hover:text-blue-400">
-                                  <IoStarOutline/>
+                                  className="mr-3 border-r-[1px] border-r-slate-500 pr-1 text-[1.1rem] hover:text-blue-400"
+                                >
+                                  <IoStarOutline />
                                 </button>
 
                                 {!isAuth && redirectLogin && (
@@ -217,8 +240,7 @@ const CoinTable = ({
                                           }}
                                           className="cursor-pointer text-[17px] font-semibold text-green-300 transition-all ease-in-out hover:bg-[#193952] hover:text-green-100"
                                         >
-                                          <IoCheckmarkOutline />{" "}
-                                          Go to Login.
+                                          <IoCheckmarkOutline /> Go to Login.
                                         </span>
                                         <div className="my-1 mt-1  h-[1px] w-full bg-gray-600"></div>
                                         <span
@@ -227,8 +249,7 @@ const CoinTable = ({
                                           }
                                           className="cursor-pointer text-[17px] font-semibold text-red-400 transition-all ease-in-out hover:bg-[#193952] hover:text-red-100"
                                         >
-                                          <IoCloseOutline/>{" "}
-                                          Cancel
+                                          <IoCloseOutline /> Cancel
                                         </span>
                                         <div className="my-1 mt-1  h-[1px] w-full bg-gray-600"></div>
                                       </div>
@@ -274,10 +295,7 @@ const CoinTable = ({
         </div>
       </div>
 
-      <div
-        className="flex h-full w-[60%] flex-col
-        sm:w-[500px] md:w-[500px] lg:w-[780px] xl:w-[780px]"
-      >
+      <div className="flex h-full flex-col lg:w-[70%] w-[55%]">
         <div className="no-scrollbar overflow-x-auto ">
           <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden border-b border-gray-200 shadow">
@@ -311,120 +329,106 @@ const CoinTable = ({
                   } text-gray-300`}
                 >
                   {data?.length ? (
-                    data
-                      ?.slice(firstPostIndex, lastPostIndex)
-                      .map(
-                        (
-                          data: {
-                            id: string;
-                            current_price: number;
-                            market_cap_change_percentage_24h: number;
-                            price_change_percentage_24h: number;
-                            total_volume: number;
-                            market_cap: number;
-                            sparkline_in_7d: { price: number[] };
-                          },
-                          index: number
-                        ) => (
-                          <tr
-                            key={`${index}-${data.id}`}
-                            className={`${
-                              mode === "light"
-                                ? "hover:bg-[#c1d3ee]"
-                                : "hover:bg-[#0c1824]"
-                            } `}
+                    data?.slice(firstPostIndex, lastPostIndex).map(
+                      (
+                        data: {
+                          id: string;
+                          current_price: number;
+                          market_cap_change_percentage_24h: number;
+                          price_change_percentage_24h: number;
+                          total_volume: number;
+                          market_cap: number;
+                          sparkline_in_7d: { price: number[] };
+                        },
+                        index: number
+                      ) => (
+                        <tr
+                          key={`${index}-${data.id}`}
+                          className={`${
+                            mode === "light"
+                              ? "hover:bg-[#c1d3ee]"
+                              : "hover:bg-[#0c1824]"
+                          } `}
+                        >
+                          <td className="w-64 whitespace-nowrap px-5 py-4 text-sm">
+                            ${data.current_price?.toLocaleString()}
+                          </td>
+                          <td
+                            className={`w-64 whitespace-nowrap px-5 py-4 text-sm  ${
+                              data.market_cap_change_percentage_24h > 0
+                                ? `${
+                                    mode === "light"
+                                      ? "text-[#256d2b]"
+                                      : "text-[#2ae937]"
+                                  } `
+                                : `${
+                                    mode === "light"
+                                      ? "text-[#993030]"
+                                      : "text-[#ff6666]"
+                                  } `
+                            }`}
                           >
-                            <td className="w-64 whitespace-nowrap px-5 py-4 text-sm">
-                              ${data.current_price?.toLocaleString()}
-                            </td>
-                            <td
-                              className={`w-64 whitespace-nowrap px-5 py-4 text-sm  ${
-                                data.market_cap_change_percentage_24h > 0
-                                  ? `${
-                                      mode === "light"
-                                        ? "text-[#256d2b]"
-                                        : "text-[#2ae937]"
-                                    } `
-                                  : `${
-                                      mode === "light"
-                                        ? "text-[#993030]"
-                                        : "text-[#ff6666]"
-                                    } `
-                              }`}
-                            >
-                              {data.market_cap_change_percentage_24h?.toFixed(
-                                2
-                              )}
-                            </td>
-                            <td
-                              className={`w-64 whitespace-nowrap px-5 py-4 text-sm  ${
-                                data.price_change_percentage_24h > 0
-                                  ? `${
-                                      mode === "light"
-                                        ? "text-[#256d2b]"
-                                        : "text-[#2ae937]"
-                                    } `
-                                  : `${
-                                      mode === "light"
-                                        ? "text-[#993030]"
-                                        : "text-[#ff6666]"
-                                    } `
-                              }`}
-                            >
-                              {data.price_change_percentage_24h?.toFixed(2)}
-                            </td>
+                            {data.market_cap_change_percentage_24h?.toFixed(2)}
+                          </td>
+                          <td
+                            className={`w-64 whitespace-nowrap px-5 py-4 text-sm  ${
+                              data.price_change_percentage_24h > 0
+                                ? `${
+                                    mode === "light"
+                                      ? "text-[#256d2b]"
+                                      : "text-[#2ae937]"
+                                  } `
+                                : `${
+                                    mode === "light"
+                                      ? "text-[#993030]"
+                                      : "text-[#ff6666]"
+                                  } `
+                            }`}
+                          >
+                            {data.price_change_percentage_24h?.toFixed(2)}
+                          </td>
 
-                            <td className="w-64 whitespace-nowrap px-5 py-4 text-sm">
-                              ${data.total_volume?.toLocaleString()}
-                            </td>
-                            <td className="w-64 whitespace-nowrap px-5 py-4 text-sm">
-                              ${data.market_cap?.toLocaleString()}
-                            </td>
-                            <td className="w-64 whitespace-nowrap px-5 py-4 text-sm">
-                              <div className="w-[100px] text-center text-[11px] md:w-[100px] md:text-[15px]  ">
-                                <Sparklines data={data?.sparkline_in_7d?.price}>
-                                  {data.current_price >
-                                  data?.sparkline_in_7d?.price[0] ? (
-                                   
-                                    <SparklinesLine
-                                      style={{
-                                        stroke: `${
-                                          mode === "light"
-                                            ? "#28a733"
-                                            : "#2ae937"
-                                        } `,
-                                        fill: `${
-                                          mode === "light"
-                                            ? "#28a733"
-                                            : "#2ae937"
-                                        } `,
-                                        fillOpacity: "0.2",
-                                      }}
-                                    />
-                                  ) : (
-                                  
-                                    <SparklinesLine
-                                      style={{
-                                        stroke: `${
-                                          mode === "light"
-                                            ? "#d82e2e"
-                                            : "#ff6666"
-                                        } `,
-                                        fill: `${
-                                          mode === "light"
-                                            ? "#d82e2e"
-                                            : "#ff6666"
-                                        } `,
-                                        fillOpacity: "0.2",
-                                      }}
-                                    />
-                                  )}
-                                </Sparklines>
-                              </div>
-                            </td>
-                          </tr>
-                        )
+                          <td className="w-64 whitespace-nowrap px-5 py-4 text-sm">
+                            ${data.total_volume?.toLocaleString()}
+                          </td>
+                          <td className="w-64 whitespace-nowrap px-5 py-4 text-sm">
+                            ${data.market_cap?.toLocaleString()}
+                          </td>
+                          <td className="w-64 whitespace-nowrap px-5 py-4 text-sm">
+                            <div className="w-[100px] text-center text-[11px] md:w-[100px] md:text-[15px]  ">
+                              <Sparklines data={data?.sparkline_in_7d?.price}>
+                                {data.current_price >
+                                data?.sparkline_in_7d?.price[0] ? (
+                                  <SparklinesLine
+                                    style={{
+                                      stroke: `${
+                                        mode === "light" ? "#28a733" : "#2ae937"
+                                      } `,
+                                      fill: `${
+                                        mode === "light" ? "#28a733" : "#2ae937"
+                                      } `,
+                                      fillOpacity: "0.2",
+                                    }}
+                                  />
+                                ) : (
+                                  <SparklinesLine
+                                    style={{
+                                      stroke: `${
+                                        mode === "light" ? "#d82e2e" : "#ff6666"
+                                      } `,
+                                      fill: `${
+                                        mode === "light" ? "#d82e2e" : "#ff6666"
+                                      } `,
+                                      fillOpacity: "0.2",
+                                    }}
+                                  />
+                                )}
+                              </Sparklines>
+                            </div>
+                          </td>
+                        </tr>
                       )
+                    )
                   ) : (
                     <tr>
                       <td>

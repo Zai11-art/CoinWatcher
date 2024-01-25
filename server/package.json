@@ -2,12 +2,12 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -x ts-node index.ts",
-    "start": "ts-node index.ts"
+    "start": "node --loader ts-node/esm index.ts"
   },
   "keywords": [],
   "author": "",

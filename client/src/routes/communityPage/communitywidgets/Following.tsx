@@ -28,12 +28,12 @@ const Following = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { userId } = useParams();
-  const userState = useSelector((state : RootState) => state.user);
-  const _id = userState?._id
-  const token = useSelector((state : RootState) => state.token);
-  const friendsState = useSelector((state : RootState) => state.user);
+  const userState = useSelector((state: RootState) => state.user);
+  const _id = userState?._id;
+  const token = useSelector((state: RootState) => state.token);
+  const friendsState = useSelector((state: RootState) => state.user);
   const friends = friendsState?.friends ?? [];
-  const mode = useSelector((state : RootState) => state.mode);
+  const mode = useSelector((state: RootState) => state.mode);
 
   const isFriend = friends.find((friend) => friend?._id === friendId);
 
@@ -63,7 +63,7 @@ const Following = ({
       }
     );
     const data: User[] = await response.json(); // Assuming `data` is an array of User objects
-  
+
     if (friendsState) {
       dispatch(setFriends({ user: friendsState, friends: data }));
     } else {

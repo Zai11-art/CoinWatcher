@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
@@ -6,7 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../state";
 import Pagination from "../../components/Pagination";
 import ExchangesTable from "../../components/ExchangesTable";
-import HomeHeadCard from "../cryptocurrencyPage/HomeHeadCard";
+import HeadCard from "../cryptos/components/header-card";
 
 const ExchangePage = () => {
   console.log(`exchange Page here`);
@@ -17,7 +16,7 @@ const ExchangePage = () => {
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
-  const mode = useSelector((state : RootState) => state.mode);
+  const mode = useSelector((state: RootState) => state.mode);
 
   const { data: exchangeList } = useQuery(["exchangeList"], () => {
     return axios
@@ -39,6 +38,7 @@ const ExchangePage = () => {
       id: 1,
     },
   ];
+  console.log(exchangeList);
 
   return (
     <div
@@ -46,7 +46,7 @@ const ExchangePage = () => {
         mode === "light" ? "bg-slate-300/95" : "bg-[#051925]"
       } `}
     >
-      <HomeHeadCard cardLinks={cardLinks} />
+      <HeadCard cardLinks={cardLinks} />
       <div
         className=" flex
             h-[100%] 
@@ -76,14 +76,16 @@ const ExchangePage = () => {
         </div>
       </div>
 
-      <div className={`text-glow z-[1]
+      <div
+        className={`text-glow z-[1]
         mt-3 flex
         h-full w-[100%]
         flex-col 
         justify-center  md:w-[700px] 
         lg:w-[1000px]   lg:flex-row xl:w-[1300px]  ${
           mode === "light" ? "text-blue-900" : "text-white"
-        }`}>
+        }`}
+      >
         <ExchangesTable
           data={exchangeList}
           firstPostIndex={firstPostIndex}

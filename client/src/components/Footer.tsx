@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useId } from "react";
-import { IoLogoDiscord, IoLogoGithub, IoLogoInstagram, IoLogoTwitter } from "react-icons/io5";
+import {
+  IoLogoDiscord,
+  IoLogoGithub,
+  IoLogoInstagram,
+  IoLogoTwitter,
+} from "react-icons/io5";
 import { RootState } from "../state";
+import PriceBar from "./PriceBar";
 
 const Footer = () => {
   const nameId = useId();
-  const mode = useSelector((state : RootState) => state.mode);
+  const mode = useSelector((state: RootState) => state.mode);
 
   let footerLinks = [
     { name: "Home", link: "/Home", id: 1 },
@@ -41,7 +47,8 @@ const Footer = () => {
   const textAnimation =
     "duration-150 ease-in-out hover:scale-[1.04] hover:text-[#c9f1fe]";
   return (
-    <div className="absolute z-[50] w-full ">
+    <div className=" bottom-0  w-full ">
+      <PriceBar />
       <div className="h-[2px] w-full bg-[#9ccddc]"></div>
       <footer
         className={`flex h-[180px] w-full flex-col items-center justify-center ${
@@ -94,6 +101,6 @@ const Footer = () => {
       </footer>
     </div>
   );
-}
+};
 
 export default Footer;

@@ -1,16 +1,13 @@
-import { Formik, ErrorMessage } from "formik";
-import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setLogin } from "../../state";
-import Dropzone from "react-dropzone";
+import axios from "axios";
+import { Formik } from "formik";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import Dropzone from "react-dropzone";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { setLogin } from "../../state";
 
 import { RootState } from "../../state";
-
-
-
 
 // CONFIG REGISTER SCHEMA
 const registerSchema = yup.object().shape({
@@ -48,7 +45,7 @@ interface ValuesRegisterType {
 }
 
 // INITIAL VALUES
-const initialValuesRegister   = {
+const initialValuesRegister = {
   userName: "",
   email: "",
   password: "",
@@ -56,16 +53,16 @@ const initialValuesRegister   = {
   bio: "",
 };
 
-const initialValuesLogin  = {
+const initialValuesLogin = {
   email: "",
   password: "",
 };
 
-const commonstyles = "rounded-t-2xl mt-[4rem] md:w-[500px] md:h-[100px] w-[90%] h-[100px]";
-
+const commonstyles =
+  "rounded-t-2xl mt-[4rem] md:w-[500px] md:h-[100px] w-[90%] h-[100px]";
 
 const Form = () => {
-  const mode = useSelector((state : RootState) => state.mode);
+  const mode = useSelector((state: RootState) => state.mode);
   const [pageType, setPageType] = useState("login");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -76,16 +73,17 @@ const Form = () => {
   // register status
   const [registerMessage, setregisterMessage] = useState("");
 
-
-
   interface OnSubmitPropsType {
     resetForm: () => void;
   }
 
-  const register = async (values : ValuesRegisterType, onSubmitProps : OnSubmitPropsType) => {
-    console.log("register stats here")
-    console.log(values)
-    console.log(onSubmitProps)
+  const register = async (
+    values: ValuesRegisterType,
+    onSubmitProps: OnSubmitPropsType
+  ) => {
+    console.log("register stats here");
+    console.log(values);
+    console.log(onSubmitProps);
     // this allows us to send form info with image
     const formData = new FormData();
     // for (let value in values) {
@@ -100,10 +98,11 @@ const Form = () => {
       "http://localhost:3001/auth/register",
       {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: formData,
       }
     );
-    const savedUser = await savedUserResponse.json();
+    const savedUser = savedUserResponse;
     onSubmitProps.resetForm();
 
     if (savedUser) {
@@ -118,12 +117,13 @@ const Form = () => {
     }
   };
 
-  
-
-  const login = async (values : ValuesType, onSubmitProps : OnSubmitPropsType) => {
-    console.log("login stats here")
-    console.log(values)
-    console.log(onSubmitProps)
+  const login = async (
+    values: ValuesType,
+    onSubmitProps: OnSubmitPropsType
+  ) => {
+    console.log("login stats here");
+    console.log(values);
+    console.log(onSubmitProps);
     const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -149,19 +149,25 @@ const Form = () => {
 
   // const resultMessage = login
 
-  const handleFormSubmitLogin = async (values : ValuesType  , onSubmitProps : OnSubmitPropsType) => {
-    console.log("handleFormSubmit here")
-    console.log(values)
-    console.log(onSubmitProps)
+  const handleFormSubmitLogin = async (
+    values: ValuesType,
+    onSubmitProps: OnSubmitPropsType
+  ) => {
+    console.log("handleFormSubmit here");
+    console.log(values);
+    console.log(onSubmitProps);
     if (isLogin) await login(values, onSubmitProps);
   };
-  const handleFormSubmitRegister = async (values : ValuesRegisterType  , onSubmitProps : OnSubmitPropsType) => {
-    console.log("handleFormSubmit here")
-    console.log(values)
-    console.log(onSubmitProps)
+  const handleFormSubmitRegister = async (
+    values: ValuesRegisterType,
+    onSubmitProps: OnSubmitPropsType
+  ) => {
+    console.log("handleFormSubmit here");
+    console.log(values);
+    console.log(onSubmitProps);
     if (isRegister) await register(values, onSubmitProps);
   };
-  
+
   return (
     <>
       <div
@@ -235,9 +241,9 @@ const Form = () => {
         <Formik
           onSubmit={isLogin ? handleFormSubmitLogin : handleFormSubmitRegister}
           // @ts-ignore
-          initialValues={isLogin ? initialValuesRegister :  initialValuesLogin}
+          initialValues={isLogin ? initialValuesRegister : initialValuesLogin}
           validationSchema={isLogin ? loginSchema : registerSchema}
-        > 
+        >
           {({
             values,
             handleBlur,
@@ -382,15 +388,14 @@ const Form = () => {
                   <div>
                     <Dropzone
                       accept={{
-                        'image/png': ['.png'],
-                        'image/jpg': ['.jpg'],
-                        'image/jpeg': ['.jpeg'],
-                        }}
+                        "image/png": [".png"],
+                        "image/jpg": [".jpg"],
+                        "image/jpeg": [".jpeg"],
+                      }}
                       multiple={false}
                       onDrop={(acceptedFiles) =>
                         setFieldValue("picture", acceptedFiles[0])
                       }
-                    
                     >
                       {({ getRootProps, getInputProps }) => (
                         <div {...getRootProps()}>
@@ -508,6 +513,7 @@ const Form = () => {
                   </div>
                 </>
               )}
+
               <div className="mt-5">
                 <button
                   id="hehe"
