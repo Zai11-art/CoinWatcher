@@ -10,10 +10,12 @@ interface ControllerProps {
 }
 
 /* REGISTER USER */
-export const register = async ({ req, res }: ControllerProps) => {
+export const register = async (req: any, res: any) => {
   try {
+    const harow = req.body;
+    console.log(harow);
     const { userName, email, bio, password, picturePath, friends } = req.body;
-
+    const awsPicturePath = req.file.location;
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
@@ -22,7 +24,7 @@ export const register = async ({ req, res }: ControllerProps) => {
       email,
       bio,
       password: passwordHash,
-      picturePath,
+      picturePath: awsPicturePath,
       friends,
     });
     const savedUser = await newUser.save();
@@ -31,11 +33,12 @@ export const register = async ({ req, res }: ControllerProps) => {
     res.status(500).json({ error: err.message });
   }
 };
-
 /* LOGGING IN */
 export const login = async ({ req, res }: ControllerProps) => {
   try {
     const { email, password } = req.body;
+    console.log(email, password);
+
     const user: Partial<{
       email: string;
       _id: string;
@@ -43,7 +46,7 @@ export const login = async ({ req, res }: ControllerProps) => {
     }> | null = await User?.findOne({ email: email });
     if (!user) return res.status(400).json({ msg: "User does not exist. " });
 
-    const isMatch = await bcrypt.compare(password, user?.password || '');
+    const isMatch = await bcrypt.compare(password, user?.password || "");
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
 
     const token = jwt.sign(

@@ -48,7 +48,6 @@ const Footer = () => {
     "duration-150 ease-in-out hover:scale-[1.04] hover:text-[#c9f1fe]";
   return (
     <div className=" bottom-0  w-full ">
-      <PriceBar />
       <div className="h-[2px] w-full bg-[#9ccddc]"></div>
       <footer
         className={`flex h-[180px] w-full flex-col items-center justify-center ${

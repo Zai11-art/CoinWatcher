@@ -404,7 +404,7 @@ html {
 }
 
 .slideshow {
-  animation: slide 500s infinite linear;
+  animation: slide 70s infinite;
 }
 
 @keyframes slide {
@@ -412,7 +412,7 @@ html {
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-800%);
+    transform: translateX(-100%);
   }
 }
 

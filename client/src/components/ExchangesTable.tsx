@@ -36,14 +36,11 @@ const ExchangesTable: React.FC<ExchangesTableType> = ({
   return (
     <>
       <div
-        className={`flex flex-row ${
+        className={`flex w-full flex-row ${
           mode === "light" ? "shadow-slate-900/30" : "shadow-blue-200/20"
         } shadow-2xl `}
       >
-        <div
-          className="flex h-full w-[40%]
-        flex-col md:w-[200px] lg:w-[220px]"
-        >
+        <div className="flex h-full flex-col lg:w-[30%] w-[40%]">
           <div>
             <div className="inline-block min-w-full align-middle">
               <div className="overflow-hidden border-b border-gray-200 shadow ">
@@ -112,10 +109,7 @@ const ExchangesTable: React.FC<ExchangesTableType> = ({
           </div>
         </div>
 
-        <div
-          className="flex h-full w-[60%]
-        flex-col md:w-[500px] lg:w-[780px]"
-        >
+        <div className="flex h-full flex-col lg:w-[70%] w-[60%]">
           <div className="no-scrollbar overflow-x-auto ">
             <div className="inline-block min-w-full align-middle">
               <div className="overflow-hidden border-b border-gray-200 shadow">

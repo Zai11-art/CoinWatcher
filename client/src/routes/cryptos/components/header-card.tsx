@@ -55,7 +55,7 @@ const HeadCard: React.FC<HeadCard> = ({ cardLinks }) => {
                 } sm:w-64 w-full border-[1px] rounded-lg border-cyan-500/30`}
               >
                 <span className="text-xs italic">{link.label}</span>
-                <span className="text-lg">
+                <span className="text-lg flex">
                   {typeof link.icon === "string" ? (
                     <img className="w-6 h-6" src={link.icon} alt={link.label} />
                   ) : (

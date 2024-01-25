@@ -239,3 +239,22 @@ export interface GlobalDataProps {
     updated_at: number | null;
   };
 }
+
+export interface RequestBodyProps {
+  body: {
+    userName: string;
+    email: string;
+    bio: string;
+    password: string;
+    picturePath: string;
+    friends: string[];
+  };
+  file: {
+    location: string;
+  };
+}
+
+export interface ControllerProps {
+  req: Request & RequestBodyProps;
+  res: Response;
+}

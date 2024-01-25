@@ -13,7 +13,7 @@ export default () => {
       <NotificationPopUp />
       <AiWidget />
       <Outlet />
-
+      <PriceBar />
       <Footer />
     </>
   );

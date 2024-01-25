@@ -125,11 +125,11 @@ const SearchBar = () => {
         <input
           ref={searchInputRef}
           name="search"
-          className={`h-[33.5px] w-full rounded-lg placeholder-gray-500 ${
+          className={`p-1 w-full rounded-lg placeholder-gray-500 ${
             mode === "light" ? "" : "bg-[#0f1b33] text-white"
           }`}
           type="text"
-          placeholder="Search coins, exchanges and more"
+          placeholder="Search here..."
           value={searchQuery}
           onChange={handleSearchInputChange}
           onFocus={handleSearchInputFocus}

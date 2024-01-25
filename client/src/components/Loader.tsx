@@ -8,10 +8,10 @@ const Loader = () => {
     <div className="flex justify-center items-center">
       <div
         className={`flex items-center justify-center absolute text-sm ${
-          mode === "light" ? "text-blue-900" : "text-[#9ccddc]"
+          mode === "light" ? "text-blue-900" : "text-[#c6f2ff]"
         }  text-glow`}
       >
-        <h1>Loading Data...</h1>
+        <h1 className="text-md text-[#c6f2ff]">Loading Data...</h1>
       </div>
       <div
         className={`animate-spin rounded-full h-32 w-32 border-b-2 ${
