@@ -42,9 +42,10 @@ interface UserProps {
 }
 
 /* READ */
-export const getUser = async ({ req, res }: ControllerProps) => {
+export const getUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    console.log(id);
     const user = await User.findById(id);
     res.status(200).json(user);
   } catch (err) {
@@ -52,7 +53,7 @@ export const getUser = async ({ req, res }: ControllerProps) => {
   }
 };
 
-export const getUserFriends = async ({ req, res }: ControllerProps) => {
+export const getUserFriends = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
@@ -75,7 +76,7 @@ export const getUserFriends = async ({ req, res }: ControllerProps) => {
   }
 };
 
-export const getFollowers = async ({ req, res }: ControllerProps) => {
+export const getFollowers = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const user: UserProps | null | undefined = await User.findById(id);
@@ -96,16 +97,16 @@ export const getFollowers = async ({ req, res }: ControllerProps) => {
 };
 
 /* UPDATE */
-export const addRemoveFriend = async ({ req, res }: ControllerProps) => {
+export const addRemoveFriend = async (req: Request, res: Response) => {
   try {
     const { id, friendId } = req.params;
     const user = await User.findById(id);
     const friend = await User.findById(friendId);
 
     if (user?.friends.includes(friendId)) {
-      user.friends = user?.friends.filter((id : string) => id !== friendId);
+      user.friends = user?.friends.filter((id: string) => id !== friendId);
       if (friend) {
-        friend.friends = friend.friends?.filter((id : string) => id !== id);
+        friend.friends = friend.friends?.filter((id: string) => id !== id);
       }
     } else {
       user?.friends.push(friendId);
@@ -116,7 +117,7 @@ export const addRemoveFriend = async ({ req, res }: ControllerProps) => {
 
     // any flag
     const friends: UserFriendsCompleteProps[] | any[] = await Promise.all(
-      (user?.friends || []).map((id : string) => User.findById(id))
+      (user?.friends || []).map((id: string) => User.findById(id))
     );
 
     const formattedFriends = friends.map(
@@ -133,7 +134,7 @@ export const addRemoveFriend = async ({ req, res }: ControllerProps) => {
 
 // update following
 
-export const addFollowing = async ({ req, res }: ControllerProps) => {
+export const addFollowing = async (req: Request, res: Response) => {
   try {
     const { id, friendId } = req.params;
     const user = await User.findById(id);
@@ -175,7 +176,7 @@ export const addFollowing = async ({ req, res }: ControllerProps) => {
   }
 };
 
-export const addToWatchList = async ({ req, res }: ControllerProps) => {
+export const addToWatchList = async (req: Request, res: Response) => {
   try {
     const { id: coinId, name: coinName } = req.body;
     const { id } = req.params;
@@ -183,7 +184,7 @@ export const addToWatchList = async ({ req, res }: ControllerProps) => {
 
     // Check if the coin already exists in the watchlist
     const existingCoin = user?.coinWatchList.find(
-      (coin : {coinId : string}) => coin.coinId === coinId
+      (coin: { coinId: string }) => coin.coinId === coinId
     );
 
     if (existingCoin) {
@@ -204,7 +205,7 @@ export const addToWatchList = async ({ req, res }: ControllerProps) => {
   }
 };
 
-export const removeToWatchList = async ({ req, res }: ControllerProps) => {
+export const removeToWatchList = async (req: Request, res: Response) => {
   try {
     const { id: coinId } = req.body;
     const { id } = req.params;
@@ -212,7 +213,7 @@ export const removeToWatchList = async ({ req, res }: ControllerProps) => {
     const user = await User.findById(id);
 
     const coinIndex: number | undefined = user?.coinWatchList.findIndex(
-      (coin : {coinId : string}) => coin.coinId === coinId
+      (coin: { coinId: string }) => coin.coinId === coinId
     );
     console.log(coinIndex);
 
@@ -232,7 +233,7 @@ export const removeToWatchList = async ({ req, res }: ControllerProps) => {
   }
 };
 
-export const getUserWatchList = async ({ req, res }: ControllerProps) => {
+export const getUserWatchList = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);

@@ -18,7 +18,7 @@ interface ControllerProps {
 }
 
 /* CREATE */
-export const createPost = async ({ req, res }: ControllerProps) => {
+export const createPost = async (req: Request, res: Response) => {
   try {
     const { userId, description, picturePath } = req.body;
     const user = await User.findById(userId);
@@ -42,7 +42,7 @@ export const createPost = async ({ req, res }: ControllerProps) => {
 };
 
 /* READ */
-export const getFeedPosts = async ({ req, res }: ControllerProps) => {
+export const getFeedPosts = async (req: Request, res: Response) => {
   try {
     const post = await Post.find();
     res.status(200).json(post);
@@ -51,7 +51,7 @@ export const getFeedPosts = async ({ req, res }: ControllerProps) => {
   }
 };
 
-export const getUserPosts = async ({ req, res }: ControllerProps) => {
+export const getUserPosts = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const post = await Post.find({ userId });
@@ -62,7 +62,7 @@ export const getUserPosts = async ({ req, res }: ControllerProps) => {
 };
 
 /* UPDATE */
-export const likePost = async ({ req, res }: ControllerProps) => {
+export const likePost = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { userId } = req.body;
@@ -88,7 +88,7 @@ export const likePost = async ({ req, res }: ControllerProps) => {
 };
 
 // CREATE COMMENT ON POST
-export const addComment = async ({ req, res }: ControllerProps) => {
+export const addComment = async (req: Request, res: Response) => {
   try {
     const { picturePath, comment, commentor } = req.body;
     const { id } = req.params;
@@ -121,7 +121,7 @@ export const addComment = async ({ req, res }: ControllerProps) => {
 };
 
 // REMOVE COMMENT ON POST
-export const deleteComment = async ({ req, res }: ControllerProps) => {
+export const deleteComment = async (req: Request, res: Response) => {
   try {
     const { commentId } = req.body;
     const { id } = req.params;
@@ -148,7 +148,7 @@ export const deleteComment = async ({ req, res }: ControllerProps) => {
 };
 
 /* DELETE POST */
-export const deletePost = async ({ req, res }: ControllerProps) => {
+export const deletePost = async (req: Request, res: Response) => {
   try {
     const { postId } = req.body;
     const post = await Post.findByIdAndDelete(postId);

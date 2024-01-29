@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import jwt, { Secret } from "jsonwebtoken";
 
 import { Request, Response } from "express";
+import { Multer } from "multer";
 
 interface ControllerProps {
   req: Request;
@@ -10,12 +11,10 @@ interface ControllerProps {
 }
 
 /* REGISTER USER */
-export const register = async (req: any, res: any) => {
+export const register = async (req: Request, res: Response) => {
   try {
-    const harow = req.body;
-    console.log(harow);
-    const { userName, email, bio, password, picturePath, friends } = req.body;
-    const awsPicturePath = req.file.location;
+    const { userName, email, bio, password, picturePath } = req.body;
+    const awsPicturePath = (req.file as Express.MulterS3.File).location;
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
@@ -25,8 +24,8 @@ export const register = async (req: any, res: any) => {
       bio,
       password: passwordHash,
       picturePath: awsPicturePath,
-      friends,
     });
+
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (err) {
@@ -34,7 +33,7 @@ export const register = async (req: any, res: any) => {
   }
 };
 /* LOGGING IN */
-export const login = async ({ req, res }: ControllerProps) => {
+export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     console.log(email, password);

@@ -11,10 +11,11 @@
     "strict": true,
     "noImplicitAny": true,
     "useUnknownInCatchVariables": false,
-    "inlineSourceMap": true,
-    "jsx": "react"
+    "inlineSourceMap": true
   },
   "ts-node": {
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true,
     "esm": true
   },
   "lib": ["esnext"]

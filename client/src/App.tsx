@@ -4,8 +4,7 @@ import { RootState } from "./state";
 
 import Apps from "./routes/apps/apps";
 import ViewPage from "./routes/cryptocurrencyViewPage/cryptoViewPage";
-import RegisterPage from "./routes/auth/LoginPage";
-import CommunityPage from "./routes/communityPage/CommunityPage";
+import Community from "./routes/communityPage/community";
 import ProfilePage from "./routes/profilePage/ProfilePage";
 import LearnPageSection from "./routes/learn/components/learn-section";
 import Crypto from "./routes/cryptos/cryptos";
@@ -16,9 +15,11 @@ import ProfileFollowers from "./routes/profilePage/ProfileFollowers";
 import ProfileFollowings from "./routes/profilePage/ProfileFollowing";
 import ProfileWatchList from "./routes/profilePage/ProfileWatchList";
 import Exchanges from "./routes/exchanges/exchanges";
-import ExchangeViewPage from "./routes/exchangeViewPage/ExchangeViewPage";
 import News from "./routes/news/news";
 import Learn from "./routes/learn/learn";
+import Login from "./routes/auth/login";
+import Register from "./routes/auth/register";
+import ExchangeViewPage from "./routes/view-exchange/exchange-view";
 
 const App = () => {
   const isAuth = Boolean(useSelector((state: RootState) => state.token));
@@ -41,8 +42,8 @@ const App = () => {
           ></Route>
           <Route path="/news" element={<News />}></Route>
           <Route path="/apps" element={<Apps />}></Route>
-          <Route path="/login" element={<RegisterPage />}></Route>
-          <Route path="/register" element={<RegisterPage />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
           <Route path="/learn" element={<Learn />}></Route>
           <Route
             path="/learn/:sectionId"
@@ -50,7 +51,7 @@ const App = () => {
           ></Route>
           <Route
             path="/community"
-            element={isAuth ? <CommunityPage /> : <RegisterPage />}
+            element={isAuth ? <Community /> : <Register />}
           ></Route>
           <Route
             path="/profile/:userId"

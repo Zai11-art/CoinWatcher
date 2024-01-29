@@ -18,7 +18,7 @@ export const verifyToken = async ({ req, res, next }: VerifyTokenProps) => {
 
     // if token exist and reiterate token
     if (token.startsWith("Bearer ")) {
-      token = token.slice(7, token.length).trimLeft();
+      token = token.slice(7, token.length).trimStart();
     }
 
     const verified = jwt.verify(

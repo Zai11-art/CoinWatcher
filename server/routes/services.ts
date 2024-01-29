@@ -6,7 +6,15 @@ import {
   GlobalDataProps,
   NewsDataProps,
   TrendingDataProps,
+  // @ts-ignore
 } from "../types/types";
+// import {
+//   CoinDataProps,
+//   ExchangeDataProps,
+//   GlobalDataProps,
+//   NewsDataProps,
+//   TrendingDataProps,
+// } from "../types/types";
 
 const router = express.Router();
 
@@ -34,7 +42,7 @@ const getAllCoins = async () => {
     // fetchedCoinsAll.push(...resPageTwo?.data);
     // fetchedCoinsAll.push(...resPageThree?.data);
 
-    console.log("Data fetched and stored in fetchedCoinsAll:", fetchedCoinsAll);
+    // console.log("Data fetched and stored in fetchedCoinsAll:", fetchedCoinsAll);
   } catch (err) {
     console.log(err);
   }

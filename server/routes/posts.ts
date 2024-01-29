@@ -9,7 +9,7 @@ import {
   likePost,
 } from "../controllers/posts.js";
 import { verifyToken } from "../middleware/auth.js";
-import upload from "../upload/image.js";
+import { upload } from "../middleware/image.js";
 
 const router = express.Router();
 

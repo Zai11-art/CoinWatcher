@@ -6,8 +6,11 @@ import { Menu, Transition } from "@headlessui/react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { RootState } from "../state";
+import { toast } from "react-toastify";
 
-function classNames(...classes: Array<string | boolean | undefined | null>): string {
+function classNames(
+  ...classes: Array<string | boolean | undefined | null>
+): string {
   return classes.filter((className) => !!className).join(" ");
 }
 
@@ -17,8 +20,12 @@ interface LoggedInDropdownType {
   userId: string | undefined;
 }
 
-const LoggedInDropdown : React.FC<LoggedInDropdownType> = ({ userName, imagePath, userId }) => {
-  const mode = useSelector((state : RootState) => state.mode);
+const LoggedInDropdown: React.FC<LoggedInDropdownType> = ({
+  userName,
+  imagePath,
+  userId,
+}) => {
+  const mode = useSelector((state: RootState) => state.mode);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -90,7 +97,10 @@ const LoggedInDropdown : React.FC<LoggedInDropdownType> = ({ userName, imagePath
                   <button
                     onClick={() => {
                       dispatch(setLogout());
-                      navigate("/home");
+                      toast.success("Logged out.");
+                      setTimeout(() => {
+                        navigate("/home");
+                      }, 2000);
                     }}
                     type="submit"
                     className={classNames(
@@ -110,6 +120,6 @@ const LoggedInDropdown : React.FC<LoggedInDropdownType> = ({ userName, imagePath
       </Transition>
     </Menu>
   );
-}
+};
 
-export default LoggedInDropdown
+export default LoggedInDropdown;

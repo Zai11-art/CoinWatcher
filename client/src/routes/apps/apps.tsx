@@ -8,7 +8,7 @@ import ExchangeCalculator from "./components/exchange-calculator";
 
 const Apps = () => {
   const mode = useSelector((state: RootState) => state.mode);
-  const [activeCalc, setActiveCalc] = useState("calc3");
+  const [activeCalc, setActiveCalc] = useState("calc1");
 
   const handleClick = (calc: string) => {
     setActiveCalc(calc);

@@ -3,40 +3,44 @@ import Friend from "./Following";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { RootState, User,setFriends } from "../../../state";
+import { RootState, User, setFriends } from "../../../state";
+import axios from "axios";
 
-
-const FriendListWidget = ({ userId }: {userId: string}) => {
+const FriendListWidget = ({ userId }: { userId: string }) => {
   const dispatch = useDispatch();
   const token = useSelector((state: RootState) => state.token);
-  const friendsState = useSelector((state: RootState) => state.user);
-  const friends = friendsState?.friends ?? [];
+  const user = useSelector((state: RootState) => state.user);
   const mode = useSelector((state: RootState) => state.mode);
+  const friends = user?.friends || [];
 
-  const getFriends = async () => {
-    const response = await fetch(
-      `http://localhost:3001/users/${userId}/friends`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    const data: User[] = await response.json(); // Assuming `data` is an array of User objects
-  
-    if (friendsState) {
-      dispatch(setFriends({ user: friendsState, friends: data }));
-    } else {
-      console.error("User not found");
-    }
-  };
+  console.log(user?.friends);
 
   useEffect(() => {
     getFriends();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const getFriends = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/users/${userId}/friends`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    console.log(response);
+    const data: User[] = await response.data; // Assuming `data` is an array of User objects
+    console.log(data);
+
+    if (user) {
+      dispatch(setFriends({ user: user, friends: data }));
+    } else {
+      console.error("User not found");
+    }
+  };
+
   return (
     <div
-      className={`h-[100%] w-[100%] rounded-t-lg ${
+      className={`flex h-full w-full rounded-t-lg ${
         mode === "light" ? "bg-slate-200" : "bg-[#062c43] text-white"
       }  mb-5 mt-6`}
     >
@@ -46,9 +50,7 @@ const FriendListWidget = ({ userId }: {userId: string}) => {
         }  rounded-t-lg px-6 py-3`}
       >
         <h1 className="font-bold">Following</h1>
-      </div>
-      <div className="mt-2 flex w-[100%] flex-col rounded-b-lg p-2 px-6 ">
-        {friends.map((friend) => (
+        {friends?.map((friend) => (
           <>
             <Friend
               key={friend._id}
@@ -67,3 +69,17 @@ const FriendListWidget = ({ userId }: {userId: string}) => {
 };
 
 export default FriendListWidget;
+
+// {friends?.map((friend) => (
+//   <>
+//     <Friend
+//       key={friend._id}
+//       friendId={friend._id}
+//       name={`${friend.userName}`}
+//       subtitle={friend.bio}
+//       userPicturePath={friend.picturePath}
+//     />
+//     {/* break */}
+//     <div className="my-4 h-[0.1px] w-full bg-blue-300" />
+//   </>
+// ))}

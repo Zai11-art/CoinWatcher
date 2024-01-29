@@ -3,33 +3,41 @@ import { useEffect } from "react";
 import { setPosts } from "../../../state";
 import PostWidget from "./PostWidget";
 import { RootState } from "../../../state";
+import axios from "axios";
 
-
-
-const AllPostsWidget = ({userId, isProfile = false}: {userId: string | undefined, isProfile: boolean }) => {
+const AllPostsWidget = ({
+  userId,
+  isProfile = false,
+}: {
+  userId: string | undefined;
+  isProfile: boolean;
+}) => {
   const dispatch = useDispatch();
-  const posts = useSelector((state:RootState) => state.posts);
-  const token = useSelector((state:RootState) => state.token);
-  const mode = useSelector((state:RootState) => state.mode);
+  const posts = useSelector((state: RootState) => state.posts);
+  const token = useSelector((state: RootState) => state.token);
+  const mode = useSelector((state: RootState) => state.mode);
+
+  console.log(posts);
 
   const getPosts = async () => {
-    const response = await fetch("http://localhost:3001/posts", {
-      method: "GET",
+    const response = await axios.get("http://localhost:3001/posts", {
       headers: { Authorization: `Bearer ${token}` },
     });
-    const data = await response.json();
+    const data = await response.data;
+
+    console.log(data);
     dispatch(setPosts({ posts: data }));
   };
 
   const getUserPosts = async () => {
-    const response = await fetch(
+    const response = await axios.get(
       `http://localhost:3001/posts/${userId}/posts`,
       {
-        method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    const data = await response.json();
+    
+    const data = await response.data;
     dispatch(setPosts({ posts: data }));
   };
 
