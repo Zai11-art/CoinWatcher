@@ -13,6 +13,10 @@ import {
   IoCloseOutline,
 } from "react-icons/io5";
 import Loader from "./Loader";
+import { useQuery } from "@tanstack/react-query";
+import { getWatchList } from "../api/get-user";
+import { addToWatchList, removetoWatchList } from "../api/patch-add";
+import { getCoinData } from "../state/utils/utils";
 
 interface CoinData {
   length: number;
@@ -45,13 +49,13 @@ const CoinTable = ({
   const loggedInUserIdState = useSelector((state: RootState) => state?.user);
   const loggedInUserId = loggedInUserIdState?._id;
 
-  const [watchList, setwatchList] = useState<{
-    coinWatchList: { coinId: string; coinName: string }[];
-  }>({ coinWatchList: [] });
+  // const [watchList, setwatchList] = useState<{
+  //   coinWatchList: { coinId: string; coinName: string }[];
+  // }>({ coinWatchList: [] });
   const [redirectLogin, setredirectLogin] = useState<boolean>(false);
 
   useEffect(() => {
-    getWatchList();
+    // getWatchList();
     const tableContainer = document.getElementById("table-container");
     const stickyColumns = document.querySelectorAll(".sticky-column");
 
@@ -66,60 +70,14 @@ const CoinTable = ({
     }
   }, []);
 
-  const getWatchList = async () => {
-    const response = await fetch(
-      `http://localhost:3001/users/${loggedInUserId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    const fetchedWatchList = await response.json();
-    setwatchList(fetchedWatchList);
-  };
+  const { data: watchList, refetch } = useQuery({
+    queryKey: ["watchListData"],
+    queryFn: () => getWatchList(loggedInUserId, token),
+  });
 
-  const addToWatchList = async (coin: object) => {
-    console.log(coin);
-    const data = coin;
-    const response = await fetch(
-      `http://localhost:3001/users/${loggedInUserId}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(data),
-      }
-    );
-
-    const watchListData = await response.json();
-    console.log(watchListData);
-    getWatchList();
-  };
-
-  const removetoWatchList = async (coin: object) => {
-    console.log(coin);
-    const data = coin;
-    const response = await fetch(
-      `http://localhost:3001/users/${loggedInUserId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(data),
-      }
-    );
-
-    const watchListData = await response.json();
-    console.log(watchListData);
-    getWatchList();
-  };
+  const { refetch: refetchCoinData } = useQuery({
+    queryKey: ["coinData"],
+  });
 
   console.log("watchlist here");
   console.log(watchList);
@@ -131,13 +89,13 @@ const CoinTable = ({
         mode === "light" ? "shadow-slate-900/30" : "shadow-blue-200/20"
       } shadow-2xl `}
     >
-      <div className="flex h-full flex-col lg:w-[30%] w-[45%]">
+      <div className="flex h-full flex-col lg:w-[30%] sm:w-[35%] w-[60%]  ">
         <div>
           <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden border-b border-gray-200 shadow ">
-              <table className="min-w-full divide-y divide-blue-400 shadow-xl">
+              <table className="min-w-full divide-y divide-blue-400 shadow-xl ">
                 <thead
-                  className={`text-glow  ${
+                  className={`text-glow sticky ${
                     mode === "light"
                       ? "bg-slate-200/70 text-slate-900"
                       : " bg-[#082030] text-gray-300"
@@ -186,7 +144,11 @@ const CoinTable = ({
                               <button
                                 aria-label="remove to watchlist"
                                 onClick={() => {
-                                  removetoWatchList(data);
+                                  removetoWatchList(
+                                    data?.id,
+                                    loggedInUserId,
+                                    token
+                                  );
                                   toast.success(
                                     `${data.name} Removed From Watchlist`,
                                     {
@@ -195,6 +157,9 @@ const CoinTable = ({
                                       }`,
                                     }
                                   );
+                                  setTimeout(() => {
+                                    refetch();
+                                  }, 200);
                                 }}
                                 className="mr-3 border-r-[1px] pr-1 text-[1.1rem] text-yellow-200 hover:text-blue-400"
                               >
@@ -206,7 +171,7 @@ const CoinTable = ({
                                 <button
                                   aria-label="add to watchlist"
                                   onClick={() => {
-                                    addToWatchList(data);
+                                    addToWatchList(data, loggedInUserId, token);
                                     setredirectLogin(!redirectLogin);
                                     isAuth &&
                                       toast.success(
@@ -219,6 +184,9 @@ const CoinTable = ({
                                           }`,
                                         }
                                       );
+                                    setTimeout(() => {
+                                      refetch();
+                                    }, 200);
                                   }}
                                   className="mr-3 border-r-[1px] border-r-slate-500 pr-1 text-[1.1rem] hover:text-blue-400"
                                 >
@@ -264,7 +232,14 @@ const CoinTable = ({
                             </span>
                           </td>
                           <td className="flex  whitespace-nowrap px-3 py-[18.5px] text-sm">
-                            <Link to={`/view/${data.id}`}>
+                            <Link
+                              onClick={() => {
+                                setTimeout(() => {
+                                  refetchCoinData();
+                                }, 2000);
+                              }}
+                              to={`/view/${data.id}`}
+                            >
                               <div className="flex">
                                 <div className="h-[1.2rem] w-[1.2rem] mr-1">
                                   <img
@@ -295,7 +270,7 @@ const CoinTable = ({
         </div>
       </div>
 
-      <div className="flex h-full flex-col lg:w-[70%] w-[55%]">
+      <div className="flex h-full flex-col lg:w-[70%] sm:w-[65%] w-[40%]">
         <div className="no-scrollbar overflow-x-auto ">
           <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden border-b border-gray-200 shadow">

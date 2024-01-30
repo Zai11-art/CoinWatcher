@@ -19,7 +19,7 @@ router.get("/:id/followers", verifyToken, getFollowers);
 
 // UPDATE
 router.post("/:id", verifyToken, addToWatchList);
-router.delete("/:id", verifyToken, removeToWatchList);
+router.delete("/:id/:coinId", verifyToken, removeToWatchList);
 router.patch("/:id/:friendId", verifyToken, addFollowing);
 
 export default router;

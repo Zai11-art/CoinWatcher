@@ -3,23 +3,23 @@ import { useSelector } from "react-redux";
 import { RootState } from "./state";
 
 import Apps from "./routes/apps/apps";
-import ViewPage from "./routes/cryptocurrencyViewPage/cryptoViewPage";
-import Community from "./routes/communityPage/community";
-import ProfilePage from "./routes/profilePage/ProfilePage";
+import CryptoView from "./routes/view-crypto/crypto-view";
+import Community from "./routes/community/community";
 import LearnPageSection from "./routes/learn/components/learn-section";
 import Crypto from "./routes/cryptos/cryptos";
 import WithoutNav from "./layouts/withoutNav";
 import WithNav from "./layouts/withNav";
 import Home from "./routes/home/home";
-import ProfileFollowers from "./routes/profilePage/ProfileFollowers";
-import ProfileFollowings from "./routes/profilePage/ProfileFollowing";
-import ProfileWatchList from "./routes/profilePage/ProfileWatchList";
+import ProfileFollowers from "./routes/profile/components/profile-followers";
+import ProfileFollowings from "./routes/profile/components/profile-following";
+import ProfileWatchList from "./routes/profile/components/profile-watchlist";
 import Exchanges from "./routes/exchanges/exchanges";
 import News from "./routes/news/news";
 import Learn from "./routes/learn/learn";
 import Login from "./routes/auth/login";
 import Register from "./routes/auth/register";
 import ExchangeViewPage from "./routes/view-exchange/exchange-view";
+import Profile from "./routes/profile/profile";
 
 const App = () => {
   const isAuth = Boolean(useSelector((state: RootState) => state.token));
@@ -34,7 +34,7 @@ const App = () => {
             element={<Crypto />}
           ></Route>
           <Route path="/cryptocurrencies" element={<Crypto />}></Route>
-          <Route path="/View/:id" element={<ViewPage />}></Route>
+          <Route path="/View/:id" element={<CryptoView />}></Route>
           <Route path="/exchanges" element={<Exchanges />}></Route>
           <Route
             path={`/exchanges/:exchangeId`}
@@ -55,7 +55,7 @@ const App = () => {
           ></Route>
           <Route
             path="/profile/:userId"
-            element={isAuth ? <ProfilePage /> : <Crypto />}
+            element={isAuth ? <Profile /> : <Crypto />}
           ></Route>
           <Route
             path="/profile/:userId/followings"

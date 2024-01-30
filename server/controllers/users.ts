@@ -179,6 +179,8 @@ export const addFollowing = async (req: Request, res: Response) => {
 export const addToWatchList = async (req: Request, res: Response) => {
   try {
     const { id: coinId, name: coinName } = req.body;
+
+    console.log(coinId, coinName);
     const { id } = req.params;
     const user = await User.findById(id);
 
@@ -207,9 +209,7 @@ export const addToWatchList = async (req: Request, res: Response) => {
 
 export const removeToWatchList = async (req: Request, res: Response) => {
   try {
-    const { id: coinId } = req.body;
-    const { id } = req.params;
-
+    const { id, coinId } = req.params;
     const user = await User.findById(id);
 
     const coinIndex: number | undefined = user?.coinWatchList.findIndex(

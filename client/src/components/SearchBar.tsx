@@ -113,15 +113,9 @@ const SearchBar = () => {
   }, [searchQuery]);
 
   return (
-    <div className="relative xl:mx-0 lg:mx-0 md:mx-5 mx-5">
-      <div className="mx-2 my-3 flex h-[100%] flex-row items-center md:mx-2">
-        <div
-          className={`mr-1 mt-1 text-xl ${
-            mode === "light" ? "text-slate-700" : " text-white"
-          }`}
-        >
-          <IoSearchOutline />
-        </div>
+    <div className="relative ">
+      <div className="my-3 flex h-[100%] flex-row items-center md:mx-2">
+     
         <input
           ref={searchInputRef}
           name="search"

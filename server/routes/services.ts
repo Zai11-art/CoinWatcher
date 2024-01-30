@@ -32,13 +32,13 @@ const getAllCoins = async () => {
     //   "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=3&sparkline=true&locale=en"
     // );
 
-    // fetchedCoinsAll = [
-    // ...resPageOne?.data,
+    fetchedCoinsAll = [
+    ...resPageOne?.data,
     // ...resPageTwo?.data,
     // ...resPageThree?.data,
-    // ];
+    ];
 
-    fetchedCoinsAll.push(...resPageOne?.data);
+    // fetchedCoinsAll.push(...resPageOne?.data);
     // fetchedCoinsAll.push(...resPageTwo?.data);
     // fetchedCoinsAll.push(...resPageThree?.data);
 
@@ -62,13 +62,13 @@ const getAllExchanges = async () => {
     //   "https://api.coingecko.com/api/v3/exchanges?per_page=250&page=3"
     // );
 
-    // fetchedExchanges = [
-    //   ...resPageOne?.data,
-    //   ...resPageTwo?.data,
-    //   ...resPageThree?.data,
-    // ];
+    fetchedExchanges = [
+      ...resPageOne?.data,
+      // ...resPageTwo?.data,
+      // ...resPageThree?.data,
+    ];
 
-    fetchedExchanges.push(...resPageOne?.data);
+    // fetchedExchanges.push(...resPageOne?.data);
     // fetchedExchanges.push(...resPageTwo?.data);
     // console.log("Data fetched and stored in fetchedCoinsAll:", fetchedCoinsAll);
   } catch (err) {
@@ -85,7 +85,7 @@ const getTrending = async () => {
     );
 
     fetchedTrendingCoins = [...res?.data?.coins];
-    fetchedTrendingCoins.push(...res?.data?.coins);
+    // fetchedTrendingCoins.push(...res?.data?.coins);
     // console.log(fetchedCoinsAll);
   } catch (error) {
     console.log(error);

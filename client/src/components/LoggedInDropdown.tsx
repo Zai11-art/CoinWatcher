@@ -34,8 +34,10 @@ const LoggedInDropdown: React.FC<LoggedInDropdownType> = ({
       <div>
         <Menu.Button
           className={`flex items-center  transition-all duration-200 ${
-            mode === "light" ? "hover:bg-blue-200" : "hover:bg-slate-800"
-          } rounded-lg`}
+            mode === "light"
+              ? "hover:bg-blue-200 border-cyan-500"
+              : "hover:bg-slate-800 border-cyan-300"
+          } border-[1px]  rounded-full`}
         >
           <div className="flex h-[35px] w-[35px] items-center justify-center rounded-full">
             <img
@@ -68,18 +70,6 @@ const LoggedInDropdown: React.FC<LoggedInDropdownType> = ({
               <Menu.Item>
                 {({ active }) => (
                   <div
-                    className={classNames(
-                      active ? " transition-all ease-in-out" : "",
-                      "block w-full px-4 py-2 text-left text-sm"
-                    )}
-                  >
-                    {userName && userName.toLocaleString()}
-                  </div>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <div
                     onClick={() => navigate(`/profile/${userId}`)}
                     className={classNames(
                       active
@@ -88,7 +78,22 @@ const LoggedInDropdown: React.FC<LoggedInDropdownType> = ({
                       "block w-full cursor-pointer px-4 py-2 text-left text-sm"
                     )}
                   >
-                    User Profile
+                    Profile
+                  </div>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <div
+                    onClick={() => navigate(`/profile/${userId}/watchlist`)}
+                    className={classNames(
+                      active
+                        ? "transition-all  ease-in-out hover:bg-[#054569]"
+                        : "",
+                      "block w-full cursor-pointer px-4 py-2 text-left text-sm"
+                    )}
+                  >
+                    Dashboard
                   </div>
                 )}
               </Menu.Item>

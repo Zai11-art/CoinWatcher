@@ -3,61 +3,42 @@ import axios from "axios";
 const BASE_URL = "https://api.coingecko.com/api/v3";
 
 export const getCoinData = async (id: string) => {
-  return await axios
-    .get(
-      `${BASE_URL}/coins/${id}?localization=true&tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true`
-    )
-    .then((response) => response.data)
-    .catch((error) => {
-      console.log(error);
-      throw error;
-    });
+  const res = await axios.get(
+    `${BASE_URL}/coins/${id}?localization=true&tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true`
+  );
+
+  return res.data;
 };
 
-export const getExchangeData = (exchangeId: string) => {
-  return axios
-    .get(`https://api.coingecko.com/api/v3/exchanges/${exchangeId}`)
-    .then((response) => response.data)
-    .catch((error) => {
-      console.log(error);
-      throw error;
-    });
+export const getExchangeData = async (exchangeId: string) => {
+  const res = await axios.get(
+    `https://api.coingecko.com/api/v3/exchanges/${exchangeId}`
+  );
+
+  return res.data;
 };
 
 export const getBiWeekly = async (id: string) => {
-  return await axios
-    .get(
-      `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=14&interval=daily`
-    )
-    .then((response) => response.data)
-    .catch((error) => {
-      console.log(error);
-      throw error;
-    });
+  const res = await axios.get(
+    `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=14&interval=daily`
+  );
+
+  return res.data;
 };
 
 export const getMonthlyChart = async (id: string) => {
-  return await axios
-    .get(
-      `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=30&interval=daily`
-    )
-    .then((response) => response.data)
-    .catch((error) => {
-      console.log(error);
-      throw error;
-    });
+  const res = await axios.get(
+    `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=30&interval=daily`
+  );
+  return res.data;
 };
 
 export const getMaxChart = async (id: string) => {
-  return await axios
-    .get(
-      `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=max&interval=daily`
-    )
-    .then((response) => response.data)
-    .catch((error) => {
-      console.log(error);
-      throw error;
-    });
+  const res = await axios.get(
+    `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=max&interval=daily`
+  );
+
+  return res.data;
 };
 
 export const getTableData = async (

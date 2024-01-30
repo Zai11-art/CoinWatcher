@@ -1,4 +1,3 @@
-import axios from "axios";
 import { lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
@@ -8,30 +7,36 @@ import Loader from "../../components/Loader";
 import HeadCard from "./components/header-card";
 import TrendingCrypto from "./components/trending-crypto";
 import FearGreadMeter from "./components/fear-greed-meter";
+import {
+  getBtcPrice,
+  getCoins,
+  getGlobalData,
+  getTrendingCoins,
+} from "../../api/get-data";
 
 const CryptoList = lazy(() => import("./components/crypto-list"));
 
 const Crypto = () => {
   const mode = useSelector((state: RootState) => state.mode);
 
-  const { data: coinList } = useQuery(["coinListData"], async () => {
-    const res = await axios.get("http://localhost:3001/services/coins");
-    return res.data;
+  const { data: coinList } = useQuery({
+    queryKey: ["coinListData"],
+    queryFn: () => getCoins(),
   });
 
-  const { data: coinTrending } = useQuery(["coinTrending"], async () => {
-    const res = await axios.get("http://localhost:3001/services/trending");
-    return res.data;
+  const { data: coinTrending } = useQuery({
+    queryKey: ["coinTrending"],
+    queryFn: () => getTrendingCoins(),
   });
 
-  const { data: btcPrice } = useQuery(["btcPrice"], async () => {
-    const res = await axios.get("http://localhost:3001/services/btcPrice");
-    return res.data;
+  const { data: btcPrice } = useQuery({
+    queryKey: ["btcPrice"],
+    queryFn: () => getBtcPrice(),
   });
 
-  const { data: globalData } = useQuery(["globalData"], async () => {
-    const res = await axios.get("http://localhost:3001/services/globaldata");
-    return res.data;
+  const { data: globalData } = useQuery({
+    queryKey: ["globalData"],
+    queryFn: () => getGlobalData(),
   });
 
   let cardLinks: {

@@ -1,14 +1,19 @@
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
 import HomeNavbar from "./components/home-navbar";
 import HeadCardHome from "./components/head-card-home";
 import HomeHero from "./components/home-hero";
 import Loader from "../../components/Loader";
+import { useQuery } from "@tanstack/react-query";
 
 const Home = () => {
-  const { isLoading, data: coinList } = useQuery(["coinListData"], async () => {
+  const getCoins = async () => {
     const res = await axios.get("http://localhost:3001/services/coins");
     return res.data;
+  };
+
+  const { data: coinList, isLoading } = useQuery({
+    queryKey: ["coinListData"],
+    queryFn: () => getCoins(),
   });
 
   return (
