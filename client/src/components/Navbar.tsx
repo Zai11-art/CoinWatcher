@@ -8,8 +8,8 @@ import { IoAppsOutline, IoClose, IoMoon, IoSunny } from "react-icons/io5";
 
 import { setLogout, setMode } from "../state";
 import { RootState } from "../state";
-import SearchBar from "./SearchBar";
-import LoggedInDropdown from "./LoggedInDropdown";
+import SearchBar from "./search-bar";
+import LoggedInDropdown from "./user-dropdown";
 import { useMediaQuery } from "../hooks/use-media-query";
 
 const Navbar = () => {
@@ -73,14 +73,14 @@ const Navbar = () => {
           </Link>
 
           {md ? null : (
-            <div className="flex gap-2 mt-1 items-center">
+            <div className="flex gap-1 mt-1 items-center">
               {navLinks.map((link, i) => (
                 <Link
                   key={i}
-                  className={`text-md transition-all ease-in-out  p-1 active:bg-slate-800 ${
+                  className={`text-[14px] transition-all ease-in-out  p-1 active:bg-slate-800 ${
                     mode === "light"
                       ? "text-slate-800 hover:text-slate-700  font-normal"
-                      : "text-slate-300 hover:text-slate-200  font-thin "
+                      : "text-slate-300 hover:text-slate-200  font-normal "
                   } `}
                   to={link.link}
                 >
@@ -135,7 +135,7 @@ const Navbar = () => {
                     <Link key={i} onClick={() => setOpen(!open)} to={lbl.link}>
                       <div
                         className={`${
-                          mode === "light" ? "font-semibold" : "font-thin"
+                          mode === "light" ? "font-semibold" : "font-semibold"
                         } flex text-xl hover:text-3xl transition-all ease-in-out items-center py-2`}
                       >
                         {/* <div className="mr-2 ">{lbl.icon}</div> */}

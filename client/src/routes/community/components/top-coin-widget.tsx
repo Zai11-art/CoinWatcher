@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 
 import { RootState } from "../../../state";
-import Loader from "../../../components/Loader";
+import Loader from "../../../components/loader";
 
 const TopCoinWidget = () => {
   const mode = useSelector((state: RootState) => state.mode);

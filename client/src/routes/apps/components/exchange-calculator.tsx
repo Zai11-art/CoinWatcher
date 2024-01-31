@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { IoArrowForwardOutline } from "react-icons/io5";
 
 import { RootState } from "../../../state";
-import Loader from "../../../components/Loader";
+import Loader from "../../../components/loader";
 import ExchangeComponent from "./exchange-component";
 
 const ExchangeCalculator = () => {

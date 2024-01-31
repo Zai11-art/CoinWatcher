@@ -9,8 +9,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { IoCreate, IoStarHalfOutline, IoStatsChart } from "react-icons/io5";
 
 import { RootState } from "../../../state";
-import CoinTable from "../../../components/CoinTable";
-import Pagination from "../../../components/Pagination";
+import CoinTable from "../../../components/crypto-table";
+import Pagination from "../../../components/pagination";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

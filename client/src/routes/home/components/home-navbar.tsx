@@ -1,4 +1,4 @@
-import LoggedInDropdown from "../../../components/LoggedInDropdown";
+import LoggedInDropdown from "../../../components/user-dropdown";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector } from "react-redux";

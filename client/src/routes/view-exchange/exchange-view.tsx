@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 import { RootState } from "../../state";
 import ExchangeViewInfo from "./components/exchange-view-info";
-import Pagination from "../../components/Pagination";
+import Pagination from "../../components/pagination";
 import ExchangeViewTable from "./components/exchange-view-table";
 import { getExchangeData } from "../../state/utils/utils";
 

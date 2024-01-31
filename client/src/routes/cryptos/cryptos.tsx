@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 
 import { RootState } from "../../state";
-import Loader from "../../components/Loader";
+import Loader from "../../components/loader";
 import HeadCard from "./components/header-card";
 import TrendingCrypto from "./components/trending-crypto";
 import FearGreadMeter from "./components/fear-greed-meter";

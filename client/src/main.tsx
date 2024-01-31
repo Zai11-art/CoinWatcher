@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "./index.css"
+import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import authReducer from "./state";
@@ -42,7 +42,7 @@ const client = new QueryClient({
   },
 });
 
-export const WrappedApp = () => 
+export const WrappedApp = () => (
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistStore(store)}>
@@ -52,8 +52,8 @@ export const WrappedApp = () =>
       </PersistGate>
     </Provider>
   </React.StrictMode>
-;
+);
 
-
-
-ReactDOM.createRoot(document.getElementById("root") as DocumentFragment | HTMLElement).render(<WrappedApp />);
+ReactDOM.createRoot(
+  document.getElementById("root") as DocumentFragment | HTMLElement
+).render(<WrappedApp />);

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { RootState } from "../../state";
-import Loader from "../../components/Loader";
+import Loader from "../../components/loader";
 import { getUser } from "../../api/get-user";
 import FeedPost from "../community/components/feed-post";
 import UserWidget from "../community/components/user-widget";

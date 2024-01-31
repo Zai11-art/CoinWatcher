@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state";
-import Pagination from "../../components/Pagination";
-import ExchangesTable from "../../components/ExchangesTable";
+import Pagination from "../../components/pagination";
+import ExchangesTable from "../../components/exchanges-table";
 import HeadCard from "../cryptos/components/header-card";
 
 const Exchanges = () => {

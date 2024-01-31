@@ -3,10 +3,10 @@ import { useState } from "react";
 
 import { RootState } from "../../state";
 import { useSelector } from "react-redux";
-import Loader from "../../components/Loader";
+import Loader from "../../components/loader";
 import NewsCard from "./components/news-card";
 import { useQuery } from "@tanstack/react-query";
-import Pagination from "../../components/Pagination";
+import Pagination from "../../components/pagination";
 import NewsCardHeader from "./components/news-card-header";
 
 const News = () => {

@@ -13,7 +13,7 @@ import {
 } from "react-icons/io5";
 
 import { RootState } from "../../../state";
-import RatingBar from "../../../components/RatingBar";
+import RatingBar from "../../../components/rating-bar";
 
 interface ExchangeViewCardUpData {
   image: string;

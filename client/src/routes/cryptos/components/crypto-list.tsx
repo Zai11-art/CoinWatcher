@@ -3,8 +3,8 @@ import { useState } from "react";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../../state/index";
-import CoinTable from "../../../components/CoinTable";
-import Pagination from "../../../components/Pagination";
+import CoinTable from "../../../components/crypto-table";
+import Pagination from "../../../components/pagination";
 
 interface CoinData {
   length: number;

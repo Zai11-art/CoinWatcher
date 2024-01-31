@@ -1,14 +1,14 @@
+import { useId } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useId } from "react";
 import {
   IoLogoDiscord,
   IoLogoGithub,
   IoLogoInstagram,
   IoLogoTwitter,
 } from "react-icons/io5";
+
 import { RootState } from "../state";
-import PriceBar from "./PriceBar";
 
 const Footer = () => {
   const nameId = useId();

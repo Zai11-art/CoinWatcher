@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { RootState } from "../../../state";
-import Loader from "../../../components/Loader";
+import Loader from "../../../components/loader";
 import WatchListWidget from "./watchlist-widget";
 import { getCoins } from "../../../api/get-data";
 import { getUser, getWatchList } from "../../../api/get-user";

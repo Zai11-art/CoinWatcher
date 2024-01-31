@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { RootState } from "../../../state";
-import Loader from "../../../components/Loader";
+import Loader from "../../../components/loader";
 
 interface ExchangeViewTableTypeData {
   base: string;

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import Loader from "../../../components/Loader";
+import Loader from "../../../components/loader";
 import { RootState } from "../../../state/index";
 
 interface TrendingLink {
